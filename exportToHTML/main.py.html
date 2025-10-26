@@ -1,0 +1,206 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #6aab73;}
+.s4 { color: #7a7e85;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">app </span><span class="s0">import </span><span class="s1">App</span>
+<span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">uix</span><span class="s2">.</span><span class="s1">screenmanager </span><span class="s0">import </span><span class="s1">ScreenManager</span><span class="s2">, </span><span class="s1">Screen</span>
+<span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">uix</span><span class="s2">.</span><span class="s1">label </span><span class="s0">import </span><span class="s1">Label</span>
+<span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">uix</span><span class="s2">.</span><span class="s1">image </span><span class="s0">import </span><span class="s1">Image</span>
+<span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">uix</span><span class="s2">.</span><span class="s1">boxlayout </span><span class="s0">import </span><span class="s1">BoxLayout</span>
+<span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">uix</span><span class="s2">.</span><span class="s1">floatlayout </span><span class="s0">import </span><span class="s1">FloatLayout</span>
+<span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">uix</span><span class="s2">.</span><span class="s1">button </span><span class="s0">import </span><span class="s1">Button</span>
+<span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">core</span><span class="s2">.</span><span class="s1">window </span><span class="s0">import </span><span class="s1">Window</span>
+<span class="s0">from </span><span class="s1">kivy</span><span class="s2">.</span><span class="s1">graphics </span><span class="s0">import </span><span class="s1">Color</span><span class="s2">, </span><span class="s1">Rectangle</span>
+<span class="s0">import </span><span class="s1">os</span>
+
+
+<span class="s0">class </span><span class="s1">Window1</span><span class="s2">(</span><span class="s1">Screen</span><span class="s2">):</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, **</span><span class="s1">kwargs</span><span class="s2">):</span>
+        <span class="s1">super</span><span class="s2">().</span><span class="s1">__init__</span><span class="s2">(**</span><span class="s1">kwargs</span><span class="s2">)</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">name </span><span class="s2">= </span><span class="s3">&quot;main&quot;</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">setUpMainWindow</span><span class="s2">()</span>
+
+    <span class="s0">def </span><span class="s1">setUpMainWindow</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s4"># Создаем основной layout</span>
+        <span class="s1">layout </span><span class="s2">= </span><span class="s1">FloatLayout</span><span class="s2">()</span>
+
+        <span class="s4"># Создаем приветственную надпись</span>
+        <span class="s1">hello_label </span><span class="s2">= </span><span class="s1">Label</span><span class="s2">(</span>
+            <span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Здравствуйте!&quot;</span><span class="s2">,</span>
+            <span class="s1">font_size</span><span class="s2">=</span><span class="s5">20</span><span class="s2">,</span>
+            <span class="s1">size_hint</span><span class="s2">=(</span><span class="s0">None</span><span class="s2">, </span><span class="s0">None</span><span class="s2">),</span>
+            <span class="s1">size</span><span class="s2">=(</span><span class="s5">300</span><span class="s2">, </span><span class="s5">50</span><span class="s2">),</span>
+            <span class="s1">pos</span><span class="s2">=(</span><span class="s5">100</span><span class="s2">, </span><span class="s5">450</span><span class="s2">)</span>
+        <span class="s2">)</span>
+        <span class="s1">layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">hello_label</span><span class="s2">)</span>
+
+        <span class="s4"># Кнопка для перехода ко второму экрану</span>
+        <span class="s1">switch_button </span><span class="s2">= </span><span class="s1">Button</span><span class="s2">(</span>
+            <span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Перейти в профиль&quot;</span><span class="s2">,</span>
+            <span class="s1">font_size</span><span class="s2">=</span><span class="s5">14</span><span class="s2">,</span>
+            <span class="s1">size_hint</span><span class="s2">=(</span><span class="s0">None</span><span class="s2">, </span><span class="s0">None</span><span class="s2">),</span>
+            <span class="s1">size</span><span class="s2">=(</span><span class="s5">150</span><span class="s2">, </span><span class="s5">50</span><span class="s2">),</span>
+            <span class="s1">pos</span><span class="s2">=(</span><span class="s5">175</span><span class="s2">, </span><span class="s5">400</span><span class="s2">)</span>
+        <span class="s2">)</span>
+        <span class="s1">switch_button</span><span class="s2">.</span><span class="s1">bind</span><span class="s2">(</span><span class="s1">on_press</span><span class="s2">=</span><span class="s1">self</span><span class="s2">.</span><span class="s1">switch_to_profile</span><span class="s2">)</span>
+        <span class="s1">layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">switch_button</span><span class="s2">)</span>
+
+        <span class="s4"># Добавляем изображение</span>
+        <span class="s1">image_path </span><span class="s2">= </span><span class="s3">r&quot;pht\317.jpg&quot;</span>
+        <span class="s0">try</span><span class="s2">:</span>
+            <span class="s0">if </span><span class="s1">os</span><span class="s2">.</span><span class="s1">path</span><span class="s2">.</span><span class="s1">exists</span><span class="s2">(</span><span class="s1">image_path</span><span class="s2">):</span>
+                <span class="s1">world_image </span><span class="s2">= </span><span class="s1">Image</span><span class="s2">(</span>
+                    <span class="s1">source</span><span class="s2">=</span><span class="s1">image_path</span><span class="s2">,</span>
+                    <span class="s1">size_hint</span><span class="s2">=(</span><span class="s0">None</span><span class="s2">, </span><span class="s0">None</span><span class="s2">),</span>
+                    <span class="s1">size</span><span class="s2">=(</span><span class="s5">490</span><span class="s2">, </span><span class="s5">380</span><span class="s2">),</span>
+                    <span class="s1">pos</span><span class="s2">=(</span><span class="s5">5</span><span class="s2">, </span><span class="s5">0</span><span class="s2">)</span>
+                <span class="s2">)</span>
+                <span class="s1">layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">world_image</span><span class="s2">)</span>
+            <span class="s0">else</span><span class="s2">:</span>
+                <span class="s1">print</span><span class="s2">(</span><span class="s3">f&quot;Image not found: </span><span class="s0">{</span><span class="s1">image_path</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+                <span class="s4"># Добавляем заглушку если изображение не найдено</span>
+                <span class="s1">error_label </span><span class="s2">= </span><span class="s1">Label</span><span class="s2">(</span>
+                    <span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Изображение не найдено&quot;</span><span class="s2">,</span>
+                    <span class="s1">pos</span><span class="s2">=(</span><span class="s5">150</span><span class="s2">, </span><span class="s5">200</span><span class="s2">)</span>
+                <span class="s2">)</span>
+                <span class="s1">layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">error_label</span><span class="s2">)</span>
+        <span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">error</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span><span class="s3">f&quot;Error loading image: </span><span class="s0">{</span><span class="s1">error</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+            <span class="s1">error_label </span><span class="s2">= </span><span class="s1">Label</span><span class="s2">(</span>
+                <span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Ошибка загрузки изображения&quot;</span><span class="s2">,</span>
+                <span class="s1">pos</span><span class="s2">=(</span><span class="s5">150</span><span class="s2">, </span><span class="s5">200</span><span class="s2">)</span>
+            <span class="s2">)</span>
+            <span class="s1">layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">error_label</span><span class="s2">)</span>
+
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">layout</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">switch_to_profile</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">instance</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">manager</span><span class="s2">.</span><span class="s1">current </span><span class="s2">= </span><span class="s3">&quot;second&quot;</span>
+
+
+<span class="s0">class </span><span class="s1">Window2</span><span class="s2">(</span><span class="s1">Screen</span><span class="s2">):</span>
+    <span class="s0">def </span><span class="s1">__init__</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, **</span><span class="s1">kwargs</span><span class="s2">):</span>
+        <span class="s1">super</span><span class="s2">().</span><span class="s1">__init__</span><span class="s2">(**</span><span class="s1">kwargs</span><span class="s2">)</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">name </span><span class="s2">= </span><span class="s3">&quot;second&quot;</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">setUpMainWindow</span><span class="s2">()</span>
+
+    <span class="s0">def </span><span class="s1">setUpMainWindow</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s4"># Создаем основной layout с вертикальным расположением</span>
+        <span class="s1">main_layout </span><span class="s2">= </span><span class="s1">BoxLayout</span><span class="s2">(</span><span class="s1">orientation</span><span class="s2">=</span><span class="s3">'vertical'</span><span class="s2">, </span><span class="s1">padding</span><span class="s2">=</span><span class="s5">10</span><span class="s2">, </span><span class="s1">spacing</span><span class="s2">=</span><span class="s5">10</span><span class="s2">)</span>
+
+        <span class="s4"># Кнопка для возврата на главный экран</span>
+        <span class="s1">back_button </span><span class="s2">= </span><span class="s1">Button</span><span class="s2">(</span>
+            <span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Назад&quot;</span><span class="s2">,</span>
+            <span class="s1">size_hint</span><span class="s2">=(</span><span class="s0">None</span><span class="s2">,</span><span class="s0">None</span><span class="s2">),</span>
+            <span class="s1">size</span><span class="s2">=(</span><span class="s5">100</span><span class="s2">, </span><span class="s5">50</span><span class="s2">),</span>
+            <span class="s1">pos</span><span class="s2">=(</span><span class="s5">175</span><span class="s2">, </span><span class="s5">400</span><span class="s2">)</span>
+        <span class="s2">)</span>
+        <span class="s1">back_button</span><span class="s2">.</span><span class="s1">bind</span><span class="s2">(</span><span class="s1">on_press</span><span class="s2">=</span><span class="s1">self</span><span class="s2">.</span><span class="s1">switch_to_main</span><span class="s2">)</span>
+
+        <span class="s4"># Создаем FloatLayout для кнопки назад</span>
+        <span class="s1">float_layout </span><span class="s2">= </span><span class="s1">FloatLayout</span><span class="s2">()</span>
+        <span class="s1">float_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">back_button</span><span class="s2">)</span>
+
+        <span class="s4"># Добавляем изображение профиля</span>
+        <span class="s1">image_path </span><span class="s2">= </span><span class="s3">r&quot;pht\3820.jpg&quot;</span>
+        <span class="s0">try</span><span class="s2">:</span>
+            <span class="s0">if </span><span class="s1">os</span><span class="s2">.</span><span class="s1">path</span><span class="s2">.</span><span class="s1">exists</span><span class="s2">(</span><span class="s1">image_path</span><span class="s2">):</span>
+                <span class="s1">profile_image </span><span class="s2">= </span><span class="s1">Image</span><span class="s2">(</span>
+                    <span class="s1">source</span><span class="s2">=</span><span class="s1">image_path</span><span class="s2">,</span>
+                    <span class="s1">size_hint</span><span class="s2">=(</span><span class="s5">1</span><span class="s2">, </span><span class="s0">None</span><span class="s2">),</span>
+                    <span class="s1">height</span><span class="s2">=</span><span class="s5">900</span><span class="s2">,</span>
+                    <span class="s1">allow_stretch</span><span class="s2">=</span><span class="s0">True</span>
+                <span class="s2">)</span>
+                <span class="s1">float_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">profile_image</span><span class="s2">)</span>
+            <span class="s0">else</span><span class="s2">:</span>
+                <span class="s1">print</span><span class="s2">(</span><span class="s3">f&quot;Файл </span><span class="s0">{</span><span class="s1">image_path</span><span class="s0">} </span><span class="s3">не найден&quot;</span><span class="s2">)</span>
+                <span class="s1">error_label </span><span class="s2">= </span><span class="s1">Label</span><span class="s2">(</span><span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Изображение профиля не найдено&quot;</span><span class="s2">)</span>
+                <span class="s1">float_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">error_label</span><span class="s2">)</span>
+        <span class="s0">except </span><span class="s1">Exception </span><span class="s0">as </span><span class="s1">e</span><span class="s2">:</span>
+            <span class="s1">print</span><span class="s2">(</span><span class="s3">f&quot;Ошибка при загрузке изображения </span><span class="s0">{</span><span class="s1">image_path</span><span class="s0">}</span><span class="s3">: </span><span class="s0">{</span><span class="s1">e</span><span class="s0">}</span><span class="s3">&quot;</span><span class="s2">)</span>
+            <span class="s1">error_label </span><span class="s2">= </span><span class="s1">Label</span><span class="s2">(</span><span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Ошибка загрузки изображения&quot;</span><span class="s2">)</span>
+            <span class="s1">float_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">error_label</span><span class="s2">)</span>
+
+        <span class="s1">main_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">float_layout</span><span class="s2">)</span>
+
+        <span class="s4"># Создаем контейнер для текстовой информации</span>
+        <span class="s1">info_layout </span><span class="s2">= </span><span class="s1">BoxLayout</span><span class="s2">(</span><span class="s1">orientation</span><span class="s2">=</span><span class="s3">'vertical'</span><span class="s2">, </span><span class="s1">spacing</span><span class="s2">=</span><span class="s5">10</span><span class="s2">, </span><span class="s1">padding</span><span class="s2">=</span><span class="s5">10</span><span class="s2">)</span>
+
+        <span class="s4"># Информация о пользователе</span>
+        <span class="s1">bio_label </span><span class="s2">= </span><span class="s1">Label</span><span class="s2">(</span>
+            <span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Мовсесян Тигран&quot;</span><span class="s2">,</span>
+            <span class="s1">font_size</span><span class="s2">=</span><span class="s5">16</span><span class="s2">,</span>
+            <span class="s1">size_hint_y</span><span class="s2">=</span><span class="s0">None</span><span class="s2">,</span>
+            <span class="s1">height</span><span class="s2">=</span><span class="s5">30</span><span class="s2">,</span>
+            <span class="s1">text_size</span><span class="s2">=(</span><span class="s5">380</span><span class="s2">, </span><span class="s0">None</span><span class="s2">),</span>
+            <span class="s1">halign</span><span class="s2">=</span><span class="s3">'left'</span>
+        <span class="s2">)</span>
+        <span class="s1">info_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">bio_label</span><span class="s2">)</span>
+
+        <span class="s1">teach_label </span><span class="s2">= </span><span class="s1">Label</span><span class="s2">(</span>
+            <span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Обучаюсь в МАИ на 2 курсе 317 кафедры управление инновациями&quot;</span><span class="s2">,</span>
+            <span class="s1">font_size</span><span class="s2">=</span><span class="s5">16</span><span class="s2">,</span>
+            <span class="s1">size_hint_y</span><span class="s2">=</span><span class="s0">None</span><span class="s2">,</span>
+            <span class="s1">height</span><span class="s2">=</span><span class="s5">60</span><span class="s2">,</span>
+            <span class="s1">text_size</span><span class="s2">=(</span><span class="s5">380</span><span class="s2">, </span><span class="s0">None</span><span class="s2">),</span>
+            <span class="s1">halign</span><span class="s2">=</span><span class="s3">'left'</span>
+        <span class="s2">)</span>
+        <span class="s1">info_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">teach_label</span><span class="s2">)</span>
+
+        <span class="s1">skills_label </span><span class="s2">= </span><span class="s1">Label</span><span class="s2">(</span>
+            <span class="s1">text</span><span class="s2">=</span><span class="s3">&quot;Скиллы: программирование, владение инностранными языками &quot;</span><span class="s2">,</span>
+            <span class="s1">font_size</span><span class="s2">=</span><span class="s5">16</span><span class="s2">,</span>
+            <span class="s1">size_hint_y</span><span class="s2">=</span><span class="s0">None</span><span class="s2">,</span>
+            <span class="s1">height</span><span class="s2">=</span><span class="s5">30</span><span class="s2">,</span>
+            <span class="s1">text_size</span><span class="s2">=(</span><span class="s5">380</span><span class="s2">, </span><span class="s0">None</span><span class="s2">),</span>
+            <span class="s1">halign</span><span class="s2">=</span><span class="s3">'left'</span>
+        <span class="s2">)</span>
+        <span class="s1">info_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">skills_label</span><span class="s2">)</span>
+
+        <span class="s1">main_layout</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">info_layout</span><span class="s2">)</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">main_layout</span><span class="s2">)</span>
+
+    <span class="s0">def </span><span class="s1">switch_to_main</span><span class="s2">(</span><span class="s1">self</span><span class="s2">, </span><span class="s1">instance</span><span class="s2">):</span>
+        <span class="s1">self</span><span class="s2">.</span><span class="s1">manager</span><span class="s2">.</span><span class="s1">current </span><span class="s2">= </span><span class="s3">&quot;main&quot;</span>
+
+
+<span class="s0">class </span><span class="s1">MyApp</span><span class="s2">(</span><span class="s1">App</span><span class="s2">):</span>
+    <span class="s0">def </span><span class="s1">build</span><span class="s2">(</span><span class="s1">self</span><span class="s2">):</span>
+        <span class="s4"># Создаем менеджер экранов</span>
+        <span class="s1">sm </span><span class="s2">= </span><span class="s1">ScreenManager</span><span class="s2">()</span>
+
+        <span class="s4"># Добавляем экраны</span>
+        <span class="s1">main_screen </span><span class="s2">= </span><span class="s1">Window1</span><span class="s2">()</span>
+        <span class="s1">second_screen </span><span class="s2">= </span><span class="s1">Window2</span><span class="s2">()</span>
+
+        <span class="s1">sm</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">main_screen</span><span class="s2">)</span>
+        <span class="s1">sm</span><span class="s2">.</span><span class="s1">add_widget</span><span class="s2">(</span><span class="s1">second_screen</span><span class="s2">)</span>
+
+        <span class="s4"># Устанавливаем начальный экран</span>
+        <span class="s1">sm</span><span class="s2">.</span><span class="s1">current </span><span class="s2">= </span><span class="s3">&quot;main&quot;</span>
+
+        <span class="s0">return </span><span class="s1">sm</span>
+
+
+<span class="s4"># Запуск приложения</span>
+<span class="s0">if </span><span class="s1">__name__ </span><span class="s2">== </span><span class="s3">&quot;__main__&quot;</span><span class="s2">:</span>
+    <span class="s1">Window</span><span class="s2">.</span><span class="s1">size </span><span class="s2">= (</span><span class="s5">400</span><span class="s2">, </span><span class="s5">500</span><span class="s2">)</span>
+    <span class="s1">MyApp</span><span class="s2">().</span><span class="s1">run</span><span class="s2">()</span>
+</pre>
+</body>
+</html>
